@@ -6,10 +6,10 @@ import os
 import fnmatch
 import shutil
 
-def getIn(t):
+def getIn(t, loading_Time):
     webbrowser.open('http://siga.saude.prefeitura.sp.gov.br/sms/login.do?method=logoff')
 
-    time.sleep(5)
+    time.sleep(loading_Time)
 
     print(pyautogui.position())
     pyautogui.moveTo(723, 286, duration=t)
@@ -21,18 +21,20 @@ def getIn(t):
     pyautogui.moveTo(1228,369, duration=t)
     pyautogui.click(1228,369, button='left', duration=t)
 
-    time.sleep(3)
+    time.sleep(2*loading_Time/3)
 
-    #Atender
+    #RecepçãoDeUsuários
     pyautogui.moveTo(291, 183, duration=t)
 
     pyautogui.moveTo(315,435, duration=t)
     pyautogui.click(315,435, button='left', duration=t)
 
+
     pyautogui.moveTo(276,366, duration=t)
     pyautogui.click(276,366, button='left', duration=t)
     pyautogui.write('835503012820395')
 
+    #OutClick
     pyautogui.moveTo(877, 331, duration=t)
     pyautogui.click(877, 331, button='left', duration=t)
 
@@ -48,6 +50,30 @@ def getIn(t):
     time.sleep(1)
     pyautogui.moveTo(1033, 635, duration=t)
     pyautogui.click(1033, 635, button='left', duration=t)
+
+    #Registro Reduzido
+    pyautogui.moveTo(291, 183, duration=t)
+    pyautogui.moveTo(335, 213, duration=t)
+    pyautogui.click(335, 213, button='left', duration=t)
+
+    #NovoAtendimento
+    pyautogui.moveTo(1622, 556, duration=t)
+    pyautogui.click(1622, 556, button='left', duration=t)
+    time.sleep(2)
+
+    #ColocaSUS
+    pyautogui.moveTo(437, 440, duration=t)
+    pyautogui.click(437, 440, button='left', duration=t)
+    pyautogui.write('835503012820395')
+
+    #OutClick
+    pyautogui.moveTo(1048, 394, duration=t)
+    pyautogui.click(1048, 394, button='left', duration=t)
+
+    #CancelClick
+    pyautogui.moveTo(1854, 927, duration=t)
+    pyautogui.click(1854, 927, button='left', duration=t)
+    pyautogui.scroll(-10000)
 
     #Sair
     pyautogui.moveTo(1818, 182, duration=t)
@@ -72,7 +98,7 @@ def window_login():
 def window_menu():
     sg.theme('reddit')
     layout = [
-    #[sg.Checkbox()],
+    [sg.Text('Loading Time'), sg.Input(key='loading_Time', size =(20,1) )],
     [sg.Slider(key='t', range=(1,100), default_value=75, size=(20,15), orientation='horizontal')],
     [sg.Button('Dar Baixa'), sg.Button('Exit')]
     ]
@@ -98,10 +124,11 @@ while True:
         
     #When we want back to the previous window
     if window == window2 and event == 'Dar Baixa':
+        loading_Time = int(values['loading_Time'])
         t = (100 - float(values['t']))/100
         window.hide()
         time.sleep(1)
-        getIn(t)
+        getIn(t, loading_Time)
         window.un_hide()
 
     if window == window2 and event == 'Exit':
