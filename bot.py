@@ -7,7 +7,7 @@ import shutil
 
 webbrowser.open('http://siga.saude.prefeitura.sp.gov.br/sms/login.do?method=logoff')
 
-time.sleep(2)
+time.sleep(5)
 
 print(pyautogui.position())
 pyautogui.moveTo(723, 286, duration=0.25)
@@ -19,7 +19,7 @@ pyautogui.click(859, 342, button='left', duration=0.25)
 pyautogui.moveTo(1228,369, duration=0.25)
 pyautogui.click(1228,369, button='left', duration=0.25)
 
-time.sleep(2)
+time.sleep(3)
 
 #Atender
 pyautogui.moveTo(291, 183, duration=0.25)
