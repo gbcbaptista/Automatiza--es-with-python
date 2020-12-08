@@ -7,6 +7,7 @@ import fnmatch
 import shutil
 
 def getIn(t, loading_Time):
+    sus = '801440482836631'
     webbrowser.open('http://siga.saude.prefeitura.sp.gov.br/sms/login.do?method=logoff')
 
     time.sleep(loading_Time)
@@ -32,7 +33,7 @@ def getIn(t, loading_Time):
 
     pyautogui.moveTo(276,366, duration=t)
     pyautogui.click(276,366, button='left', duration=t)
-    pyautogui.write('835503012820395')
+    pyautogui.write(sus)
 
     #OutClick
     pyautogui.moveTo(877, 331, duration=t)
@@ -64,7 +65,7 @@ def getIn(t, loading_Time):
     #ColocaSUS
     pyautogui.moveTo(437, 440, duration=t)
     pyautogui.click(437, 440, button='left', duration=t)
-    pyautogui.write('835503012820395')
+    pyautogui.write(sus)
 
     #OutClick
     pyautogui.moveTo(1048, 394, duration=t)
@@ -75,12 +76,12 @@ def getIn(t, loading_Time):
     pyautogui.click(1854, 927, button='left', duration=t)
     pyautogui.scroll(-10000)
 
-    #Sair
-    pyautogui.moveTo(1818, 182, duration=t)
-    pyautogui.click(1818, 182, button='left', duration=t)
+def exit():
+    pyautogui.moveTo(1818, 182, duration=0.25)
+    pyautogui.click(1818, 182, button='left', duration=0.25)
     time.sleep(1)
-    pyautogui.moveTo(1052, 229, duration=t)
-    pyautogui.click(1052, 229, button='left', duration=t)
+    pyautogui.moveTo(1052, 229, duration=0.25)
+    pyautogui.click(1052, 229, button='left', duration=0.25)
     time.sleep(1)
     pyautogui.hotkey('ctrl', 'w')
 
@@ -98,6 +99,7 @@ def window_login():
 def window_menu():
     sg.theme('reddit')
     layout = [
+    [sg.Text('SUS         '), sg.Input(key='sus', size =(20,1) )],
     [sg.Text('Loading Time'), sg.Input(key='loading_Time', size =(20,1) )],
     [sg.Slider(key='t', range=(1,100), default_value=75, size=(20,15), orientation='horizontal')],
     [sg.Button('Dar Baixa'), sg.Button('Exit')]
@@ -128,7 +130,8 @@ while True:
         t = (100 - float(values['t']))/100
         window.hide()
         time.sleep(1)
-        getIn(t, loading_Time)
+        getIn(t, loading_Time   )
+        exit()
         window.un_hide()
 
     if window == window2 and event == 'Exit':
