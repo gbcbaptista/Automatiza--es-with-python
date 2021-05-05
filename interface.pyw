@@ -7,7 +7,8 @@ import fnmatch
 import shutil
 
 def getIn(t, loading_Time):
-    sus = '801440482836631'
+    
+    sus = input(Digite o sus: )
     webbrowser.open('http://siga.saude.prefeitura.sp.gov.br/sms/login.do?method=logoff')
 
     time.sleep(loading_Time)
